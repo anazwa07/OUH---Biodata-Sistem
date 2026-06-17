@@ -1,17 +1,42 @@
-2026-05-26T15:21:15.995Z [INFO] ----------------------invoke appmod-redirect-to-upgrade-agent----------------------
-2026-05-26T15:21:15.997Z [INFO] [Tool.invoke]({name: appmod-redirect-to-upgrade-agent, modelId: auto, input: {
-  "originalPrompt": "Upgrade this Java project at d:\\BiodataOUH\\biodataouh to the latest LTS Java runtime.",
-  "projectPath": "d:\\BiodataOUH\\biodataouh"
-}}).
-2026-05-26T15:21:15.998Z [INFO] [Tool.invoke] do invoke.
-2026-05-26T15:21:15.999Z [INFO] [RedirectToUpgradeAgentTool] Redirecting to custom agent "modernize-java-upgrade" with prompt: Upgrade this Java project at d:\BiodataOUH\biodataouh to the latest LTS Java runtime.
-2026-05-26T15:21:16.298Z [INFO] [RedirectToUpgradeAgentTool] Redirected to custom agent "modernize-java-upgrade". User MUST switch to the new agent to continue.
-2026-05-26T15:21:16.299Z [INFO] [Tool.invoke]({result: {
-  "message": "The upgrade request has been redirected to the \"modernize-java-upgrade\" agent in a new chat session. You MUST! stop processing in this session.",
-  "result": {
-    "redirected": true,
-    "agentName": "modernize-java-upgrade",
-    "prompt": "Upgrade this Java project at d:\\BiodataOUH\\biodataouh to the latest LTS Java runtime."
-  }
-}}).
-2026-05-26T15:21:16.300Z [INFO] ----------------------invoked appmod-redirect-to-upgrade-agent----------------------
+package com.biodataouh;
+
+public class Developer {
+    private int id;
+    private String nama;
+    private String nim;
+    private String kelas;
+    // ── PERUBAHAN: Tambah field foto path untuk profil developer ──
+    private String fotoPath;
+
+    // CONSTRUCTOR UTAMA (lama, 4 param) — tetap ada agar backward-compatible
+    public Developer(int id, String nama, String nim, String kelas) {
+        this.id = id;
+        this.nama = nama;
+        this.nim = nim;
+        this.kelas = kelas;
+        this.fotoPath = "";
+    }
+
+    // CONSTRUCTOR BARU (5 param) — digunakan saat DatabaseManager membaca kolom foto_path
+    public Developer(int id, String nama, String nim, String kelas, String fotoPath) {
+        this.id = id;
+        this.nama = nama;
+        this.nim = nim;
+        this.kelas = kelas;
+        this.fotoPath = (fotoPath != null) ? fotoPath : "";
+    }
+
+    // GETTER METHODS
+    public int getId() { return id; }
+    public String getNama() { return nama; }
+    public String getNim() { return nim; }
+    public String getKelas() { return kelas; }
+    public String getFotoPath() { return fotoPath; }
+
+    // SETTER METHODS
+    public void setId(int id) { this.id = id; }
+    public void setNama(String nama) { this.nama = nama; }
+    public void setNim(String nim) { this.nim = nim; }
+    public void setKelas(String kelas) { this.kelas = kelas; }
+    public void setFotoPath(String fotoPath) { this.fotoPath = (fotoPath != null) ? fotoPath : ""; }
+}
