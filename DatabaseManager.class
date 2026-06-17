@@ -1,0 +1,105 @@
+# Upgrade Plan: biodataouh (20260526160909)
+
+- **Generated**: 2026-05-26 16:09:09
+- **HEAD Branch**: N/A
+- **HEAD Commit ID**: N/A
+
+## Available Tools
+
+**JDKs**
+- Java 21.0.11: C:\Program Files\Java\jdk-21.0.11\bin (current project JDK, used by step 2)
+- Java 25.0.2: C:\Program Files\Java\jdk-25.0.2\bin (target JDK, used by steps 1 and 4)
+
+**Build Tools**
+- Maven: **<TO_BE_INSTALLED>** (required by step 1)
+- Maven Wrapper: not present
+
+## Guidelines
+
+> Note: You can add any specific guidelines or constraints for the upgrade process here if needed, bullet points are preferred.
+
+- The project is a Maven-based JavaFX application with a module descriptor.
+- The target is Java 25 as selected by the user.
+- Version control is unavailable in this workspace, so changes will not be committed by git during this upgrade.
+
+## Options
+
+- Working branch: appmod/java-upgrade-20260526160909
+- Run tests before and after the upgrade: true
+
+## Upgrade Goals
+
+- Upgrade project runtime target to Java 25
+
+## Technology Stack
+
+| Technology/Dependency | Current | Min Compatible | Why Incompatible |
+| --------------------- | ------- | -------------- | ---------------------------------------------- |
+| Java | 21 | 25 | User requested highest LTS target |
+| Maven | none installed | 3.9.0+ | Required for reliable Java 25 support and plugin compatibility |
+| maven-compiler-plugin | managed by Maven | 3.11.0 | Recommended for Java 25 release support |
+| JavaFX | 21 | 21 | JavaFX 21 remains compatible with JDK 25 |
+| MySQL Connector/J | 9.0.0 | 9.0.0 | No Java 25 incompatibility detected from current usage |
+| Ikonli JavaFX | 12.3.1 | 12.3.1 | Compatible with JavaFX 21 module usage |
+
+## Derived Upgrades
+
+- Install Maven 3.9+ because the workspace has no Maven installation and Java 25 requires a supported build tool.
+- Update `pom.xml` to target Java 25 explicitly and to use `maven-compiler-plugin` 3.11.0.
+- Add `maven-surefire-plugin` 3.1.2 for stable test execution on Java 25.
+- Remove the unused custom `com.biodataouh.FontIcon` source file to resolve a current compile-time type conflict with `org.kordamp.ikonli.javafx.FontIcon`.
+
+## Impact Analysis
+
+### Dependency Changes
+
+| File | Dependency | Current | Action | Target | Reason |
+|------|-----------|---------|--------|--------|--------|
+| pom.xml | maven.compiler.source | 21 | upgrade | 25 | Target Java 25 |
+| pom.xml | maven.compiler.target | 21 | upgrade | 25 | Target Java 25 |
+| pom.xml | maven-compiler-plugin | managed | add | 3.11.0 | Recommended compiler plugin for Java 25 |
+| pom.xml | maven-surefire-plugin | managed | add | 3.1.2 | Stable test execution on JDK 25 |
+
+### Source Code Changes
+
+| File | Location | Current | Required Change | Reason |
+|------|----------|---------|----------------|--------|
+| src/main/java/com/biodataouh/FontIcon.java | entire file | empty placeholder class | remove file | Conflicts with imported `org.kordamp.ikonli.javafx.FontIcon` and prevents compilation |
+
+### Configuration Changes
+
+No application configuration files require changes for this runtime upgrade.
+
+### CI/CD Changes
+
+No CI/CD files were detected in the workspace that require immediate changes.
+
+### Risks & Warnings
+
+- **No Maven installation found**: The environment currently lacks Maven, so Step 1 must install and validate Maven 3.9+ before any build or baseline step.
+  - Mitigation: install Maven in Step 1 and use it for all subsequent verification.
+- **JavaFX runtime launch not configured by Maven**: The project uses module-based JavaFX and may require runtime module-path tooling for execution even if compilation succeeds.
+  - Mitigation: keep the upgrade focused on compile/test verification; if runtime launch is needed later, add `javafx-maven-plugin` or explicit module-path configuration.
+- **Custom `FontIcon` class collision**: This is a compile-critical issue under current code and must be fixed to allow the build to succeed.
+
+## Upgrade Steps
+
+- Step 1: Setup environment and install Maven
+  - Rationale: The workspace has no Maven install and Java 25 validation requires a supported build tool.
+  - Changes to Make: install Maven 3.9+; verify JDK 25 path and Maven availability.
+  - Verification: `mvn -v` with JDK 25, expected Maven version 3.9.x or newer.
+
+- Step 2: Baseline compile and test on current Java 21
+  - Rationale: Capture current project stability before changing the runtime target.
+  - Changes to Make: none in project files; verify using existing code and current JDK.
+  - Verification: `mvn clean compile test-compile -q && mvn clean test -q` with JDK 21.
+
+- Step 3: Migrate project to Java 25 and fix compile conflict
+  - Rationale: Apply the target JDK upgrade and remove the current source conflict that blocks compilation.
+  - Changes to Make: update `pom.xml` for Java 25, add explicit compiler and surefire plugins, remove `src/main/java/com/biodataouh/FontIcon.java`.
+  - Verification: `mvn clean test-compile -q` with JDK 25.
+
+- Step 4: Final validation on Java 25
+  - Rationale: Ensure the upgraded project compiles and the full test lifecycle passes on the target runtime.
+  - Changes to Make: resolve any issues surfaced by compilation or tests.
+  - Verification: `mvn clean test -q` with JDK 25.

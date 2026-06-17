@@ -1,0 +1,134 @@
+2026-05-26T16:09:09.698Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-05-26T16:09:09.715Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "projectPath": "d:\\BiodataOUH\\biodataouh",
+  "event": "precheckCompleted",
+  "phase": "precheck",
+  "status": "succeeded",
+  "message": "User selected Java 25 as the upgrade target.",
+  "details": {
+    "baseJdkVersion": "21",
+    "targetVersion": "25"
+  }
+}}).
+2026-05-26T16:09:09.716Z [INFO] [Tool.invoke] do invoke.
+2026-05-26T16:09:09.723Z [INFO] Project d:\BiodataOUH\biodataouh is a maven project, try to get java version from pom.xml
+2026-05-26T16:09:09.726Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'precheckCompleted' reported!\nSession ID: 20260526160909,\nSession Dir: d:\\BiodataOUH\\biodataouh\\.github\\modernize\\java-upgrade\\20260526160909"
+}}).
+2026-05-26T16:09:09.727Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-05-26T16:09:09.739Z [INFO] Project java version: 21
+2026-05-26T16:09:09.741Z [INFO] Maven project detected.
+2026-05-26T16:09:09.743Z [INFO] Build tool type: mvn
+2026-05-26T16:09:09.894Z [INFO] JDK: {
+  "name": "java",
+  "path": "C:\\Program Files\\Java\\jdk-21.0.11\\bin",
+  "version": "21"
+}
+2026-05-26T16:09:09.911Z [INFO] Build tool: undefined
+2026-05-26T16:09:09.912Z [ERROR] Failed to detect or resolve build tool for the project at d:\BiodataOUH\biodataouh.
+2026-05-26T16:09:09.913Z [WARN] [ReportEventTool] Full project info unavailable, attempting lightweight fallback: UserError: Failed to detect or resolve build tool for the project at d:\BiodataOUH\biodataouh. Please ensure the build tool Maven is installed and properly configured on the machine.
+2026-05-26T16:09:09.916Z [INFO] Maven project detected.
+2026-05-26T16:09:09.916Z [INFO] Project d:\BiodataOUH\biodataouh is a maven project, try to get java version from pom.xml
+2026-05-26T16:09:17.870Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-05-26T16:09:17.871Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "sessionId": "20260526160909",
+  "projectPath": "d:\\BiodataOUH\\biodataouh",
+  "event": "planGenerationStarted",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-05-26T16:09:17.871Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-05-26T16:09:17.872Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-05-26T16:09:17.873Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-05-26T16:09:18.213Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-05-26T16:09:18.214Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "sessionId": "20260526160909",
+  "projectPath": "d:\\BiodataOUH\\biodataouh",
+  "event": "planGenerationStarted",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-05-26T16:09:18.214Z [INFO] [Tool.invoke] do invoke.
+2026-05-26T16:09:18.215Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planGenerationStarted' reported!\nSession ID: 20260526160909,\nSession Dir: d:\\BiodataOUH\\biodataouh\\.github\\modernize\\java-upgrade\\20260526160909"
+}}).
+2026-05-26T16:09:18.215Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-05-26T16:09:18.507Z [INFO] ---------------------prepare appmod-list-jdks----------------------
+2026-05-26T16:09:18.508Z [INFO] [Tool.prepareInvocation]({name: appmod-list-jdks, input: {
+  "sessionId": "20260526160909"
+}}).
+2026-05-26T16:09:18.509Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-05-26T16:09:18.512Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "List jdks"
+}}).
+2026-05-26T16:09:18.513Z [INFO] ----------------------prepared appmod-list-jdks----------------------
+2026-05-26T16:09:18.954Z [INFO] ----------------------invoke appmod-list-jdks----------------------
+2026-05-26T16:09:18.963Z [INFO] [Tool.invoke]({name: appmod-list-jdks, modelId: auto, input: {
+  "sessionId": "20260526160909"
+}}).
+2026-05-26T16:09:18.963Z [INFO] [Tool.invoke] do invoke.
+2026-05-26T16:09:19.076Z [INFO] [Tool.invoke]({result: {
+  "message": "We found following jdks in your system:\n\n1. Java 21.0.11\n   📁 Path: C:\\Program Files\\Java\\jdk-21.0.11\\bin\n   🏷️ Source: others\n\n2. Java 25.0.2\n   📁 Path: C:\\Program Files\\Java\\jdk-25.0.2\\bin\n   🏷️ Source: others\n\nTotal: 2 JDK installation(s) found"
+}}).
+2026-05-26T16:09:19.077Z [INFO] ----------------------invoked appmod-list-jdks----------------------
+2026-05-26T16:09:19.108Z [INFO] ---------------------prepare appmod-list-mavens----------------------
+2026-05-26T16:09:19.109Z [INFO] [Tool.prepareInvocation]({name: appmod-list-mavens, input: {
+  "sessionId": "20260526160909",
+  "includeVersion": true
+}}).
+2026-05-26T16:09:19.109Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-05-26T16:09:19.110Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "List mavens"
+}}).
+2026-05-26T16:09:19.111Z [INFO] ----------------------prepared appmod-list-mavens----------------------
+2026-05-26T16:09:19.319Z [INFO] ----------------------invoke appmod-list-mavens----------------------
+2026-05-26T16:09:19.320Z [INFO] [Tool.invoke]({name: appmod-list-mavens, modelId: auto, input: {
+  "sessionId": "20260526160909",
+  "includeVersion": true
+}}).
+2026-05-26T16:09:19.321Z [INFO] [Tool.invoke] do invoke.
+2026-05-26T16:09:19.327Z [INFO] [Tool.invoke]({result: {
+  "message": "No Maven installations found."
+}}).
+2026-05-26T16:09:19.328Z [INFO] ----------------------invoked appmod-list-mavens----------------------
+2026-05-26T16:13:20.959Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-05-26T16:13:20.959Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "sessionId": "20260526160909",
+  "projectPath": "d:\\BiodataOUH\\biodataouh",
+  "event": "planReviewed",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-05-26T16:13:20.960Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-05-26T16:13:20.960Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-05-26T16:13:20.961Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-05-26T16:13:21.076Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-05-26T16:13:21.077Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "sessionId": "20260526160909",
+  "projectPath": "d:\\BiodataOUH\\biodataouh",
+  "event": "planReviewed",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-05-26T16:13:21.077Z [INFO] [Tool.invoke] do invoke.
+2026-05-26T16:13:21.080Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planReviewed' reported!\nSession ID: 20260526160909,\nSession Dir: d:\\BiodataOUH\\biodataouh\\.github\\modernize\\java-upgrade\\20260526160909"
+}}).
+2026-05-26T16:13:21.081Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-05-26T16:13:40.718Z [INFO] ---------------------prepare appmod-confirm-upgrade-plan----------------------
+2026-05-26T16:13:40.719Z [INFO] [Tool.prepareInvocation]({name: appmod-confirm-upgrade-plan, input: {
+  "sessionId": "20260526160909"
+}}).
+2026-05-26T16:13:40.719Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-05-26T16:13:40.720Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Review [upgrade plan](file:///d:/BiodataOUH/biodataouh/.github/modernize/java-upgrade/20260526160909/plan.md)",
+  "confirmationMessages": {
+    "title": "Plan generated",
+    "message": "Please review the generated plan and make any necessary adjustments before proceeding. You can modify the generated [`plan.md`](file:///d:/BiodataOUH/biodataouh/.github/modernize/java-upgrade/20260526160909/plan.md) directly."
+  }
+}}).
+2026-05-26T16:13:40.721Z [INFO] ----------------------prepared appmod-confirm-upgrade-plan----------------------

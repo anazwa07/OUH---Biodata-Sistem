@@ -1,0 +1,110 @@
+# Upgrade Plan: BiodataOUH (20260526153323)
+
+- **Generated**: May 26, 2026
+- **HEAD Branch**: modernize/java-20260526223045
+- **HEAD Commit ID**: (checked at execution time)
+
+## Available Tools
+
+**JDKs**
+- JDK 21.0.11: C:\Program Files\Java\jdk-21.0.11 (current project JDK, used by steps 2, baseline)
+- JDK 25.0.2: C:\Program Files\Java\jdk-25.0.2 (target JDK, used by step 3 onwards)
+
+**Build Tools**
+- Maven: No system-wide installation found
+- Maven Wrapper: Not present — will use direct Maven invocation or install Maven
+
+## Guidelines
+
+> Note: This is a modular JavaFX desktop application with MySQL integration. The upgrade focuses on modernizing the Java runtime and dependencies to take advantage of Java 25 features and improvements.
+
+## Options
+
+- Working branch: modernize/java-20260526223045 (already created by coordinator)
+- Run tests before and after the upgrade: false (test folder is empty; no test code exists)
+
+## Upgrade Goals
+
+- **Java**: 21 → 25
+- **Maintain JavaFX desktop application functionality** with Java 25 compatibility
+
+## Technology Stack
+
+| Technology/Dependency    | Current | Min Compatible | Why Incompatible                               |
+| ------------------------ | ------- | -------------- | ---------------------------------------------- |
+| Java                     | 21      | 25             | User requested                                 |
+| Maven Compiler Plugin    | 3.x (default) | 3.11.0         | 3.11+ recommended for better Java 25 support |
+| JavaFX (controls, fxml)  | 21      | 25             | Java 25 requires JavaFX 25.x for full compatibility |
+| MySQL Connector J        | 9.0.0   | 9.0.0+         | Compatible with Java 25; no change needed     |
+
+## Derived Upgrades
+
+1. **JavaFX 21 → JavaFX 25.x**: Java 25 requires matching JavaFX version for module system and platform compatibility. Update all JavaFX artifacts (controls, fxml, graphics) to version 25.
+2. **maven-compiler-plugin → 3.11.0+**: Explicit configuration recommended for Java 25 support; ensures javac compatibility.
+3. **Maven: Ensure 3.9+**: Maven 3.9.x recommended (3.8.x is EOL but still functional). Installation/verification will happen in Step 1.
+
+## Impact Analysis
+
+### Dependency Changes
+
+| File | Dependency | Current | Action | Target | Reason |
+|------|-----------|---------|--------|--------|--------|
+| pom.xml | maven.compiler.source | 21 | upgrade | 25 | User requested upgrade to Java 25 |
+| pom.xml | maven.compiler.target | 21 | upgrade | 25 | User requested upgrade to Java 25 |
+| pom.xml | javafx-controls | 21 | upgrade | 25 | Required for Java 25 compatibility |
+| pom.xml | javafx-fxml | 21 | upgrade | 25 | Required for Java 25 compatibility |
+| pom.xml | maven-compiler-plugin | (not explicit, using default) | add | 3.11.0 | Explicit configuration for Java 25 |
+
+### Source Code Changes
+
+| File | Location | Current | Required Change | Reason |
+|------|----------|---------|----------------|--------|
+| None identified | - | - | - | No breaking changes in Java 21→25 for this codebase. Module system already in use (module-info.java), no reflection into java.base internals detected. |
+
+### Configuration Changes
+
+| File | Property/Setting | Current | Required Change | Reason |
+|------|----------|---------|---|---------|
+| None identified | - | - | - | No config file changes needed. pom.xml properties handle Java version via maven.compiler.* properties. |
+
+### CI/CD Changes
+
+| File | Location | Current | Required Change |
+|------|----------|---------|----------------|
+| None identified | - | - | No CI/CD files found in workspace; no changes needed |
+
+### Risks & Warnings
+
+- **Empty test suite**: Test folder exists but contains no test code. Baseline and final validation will verify compilation only. If runtime issues arise post-upgrade, they will not be caught by automated tests. **Mitigation**: Manual smoke testing of the application UI and database operations recommended after deployment.
+- **JavaFX platform modules**: JavaFX 25 may have module system refinements. The existing `module-info.java` opens and exports correctly; no changes expected, but verify at runtime if UI doesn't render properly. **Mitigation**: Test the GUI after compilation; if issues occur, check JavaFX logs.
+- **MySQL Connector J 9.0.0**: Currently at latest stable; compatible with Java 25. No action needed. Monitor for security updates.
+
+## Upgrade Steps
+
+- **Step 1: Setup Environment**
+  - **Rationale**: Verify required JDKs and Maven availability. Install Maven if necessary for proper build execution.
+  - **Changes to Make**: Verify JDK 25.0.2 availability. Ensure Maven 3.9+ is accessible (install if missing).
+  - **Verification**: `mvn -version` should show Maven 3.9+ with Java 25 detected. Command: `mvn --version`; JDK: N/A (checking Maven/JDK); Expected Result: Maven 3.9+ output, Java 25.x referenced.
+
+- **Step 2: Setup Baseline**
+  - **Rationale**: Compile and establish a baseline with the current Java 21 to document current state and test compatibility before upgrade.
+  - **Changes to Make**: No code changes; verification only.
+  - **Verification**: Command: `mvn clean compile -q`; JDK: C:\Program Files\Java\jdk-21.0.11; Expected Result: Compilation SUCCESS.
+
+- **Step 3: Upgrade Maven Compiler Plugin and Java Target Properties**
+  - **Rationale**: Introduce explicit maven-compiler-plugin configuration and update Java target properties to Java 25. This is the primary build configuration change.
+  - **Changes to Make**: Add explicit `maven-compiler-plugin 3.11.0` to pom.xml build section. Update `maven.compiler.source` and `maven.compiler.target` properties to 25.
+  - **Verification**: Command: `mvn clean compile -q`; JDK: C:\Program Files\Java\jdk-25.0.2; Expected Result: Compilation SUCCESS with Java 25.
+
+- **Step 4: Upgrade JavaFX Dependencies to Version 25**
+  - **Rationale**: Update JavaFX to version 25 for full module system and platform compatibility with Java 25.
+  - **Changes to Make**: Update javafx-controls, javafx-fxml versions from 21 to 25 in pom.xml dependencies.
+  - **Verification**: Command: `mvn clean compile -q`; JDK: C:\Program Files\Java\jdk-25.0.2; Expected Result: Compilation SUCCESS. Dependencies resolved and compiled with Java 25.
+
+- **Step 5: Final Validation**
+  - **Rationale**: Verify complete upgrade success, ensure all goals are met, and confirm module system functionality.
+  - **Changes to Make**: No code changes; verification and cleanup of temporary artifacts only.
+  - **Verification**: Command: `mvn clean compile -q` followed by `mvn clean package -q`; JDK: C:\Program Files\Java\jdk-25.0.2; Expected Result: Full build SUCCESS. Module compilation successful. No TODOs or temporary workarounds remaining.
+
+---
+
